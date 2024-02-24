@@ -12,17 +12,18 @@
   outline.style.strokeDasharray=outlineLength;
   outline.style.strokeDashoffset=outlineLength;
   timeDisplay.textContent=`${Math.floor(fakeDuration/60)}:${String(Math.floor(fakeDuration%60)).padStart(2,'0')}`;
-  //音楽を変更
+
+  //アイコンをクリックしたら音楽を変更
   sounds.forEach(sound =>{
     sound.addEventListener("click",function(){
       song.src=this.getAttribute("data-sound");
       video.src =this.getAttribute("data-video");
+      song.play();
       checkPlaying(song);
- 
     });
   });
 
-  //音楽を再生
+  //再生ボタンを押したら音楽を再生
   play.addEventListener("click",()=>{
     checkPlaying(song);
     });
@@ -35,7 +36,8 @@
       timeDisplay.textContent=`${Math.floor(fakeDuration/60)}:${String(Math.floor(fakeDuration % 60)).padStart(2,'0')}`;
     })
   });
-//音楽の再生・停止ボタン
+
+//音楽の再生・停止
   const checkPlaying = song =>{
   if(song.paused){
     song.play();
@@ -51,7 +53,7 @@
  song.ontimeupdate = () => {
   let currentTime=song.currentTime;
   let elapsed=fakeDuration - currentTime;
-  let seconds=Math.floor(elapsed % 60);
+  let seconds=String(Math.floor(elapsed % 60)).padStart(2,'0');
   let minutes =Math.floor( elapsed / 60);
   timeDisplay.textContent=`${minutes}:${seconds}`;
 
