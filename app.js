@@ -34,6 +34,9 @@
     option.addEventListener("click",function(){
       fakeDuration=this.getAttribute("data-time");
       timeDisplay.textContent=`${Math.floor(fakeDuration/60)}:${String(Math.floor(fakeDuration % 60)).padStart(2,'0')}`;
+      song.play();
+      song.currentTime=0;
+      checkPlaying(song);
     })
   });
 
